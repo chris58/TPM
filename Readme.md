@@ -16,4 +16,10 @@ The default web browser will pop up
 
 Database will be empty for each restart
 
+Select TransportDemands/All Transport Demands
+
+Select a TransportDemand
+
+Click 'Plan Alternatives'
+
 
