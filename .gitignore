@@ -1,0 +1,32 @@
+# Lines starting with '#' are considered comments.
+# Ignore any file named foo.txt.
+foo.txt
+# Ignore (generated) html files,
+*.html
+# except foo.html which is maintained by hand.
+!foo.html
+# Ignore objects and archives.
+#*.[oa]
+#ignore classes directories
+target/classes/
+target/test-classes/
+*.class
+#ignore surefire reports
+target/surefire-reports/
+#ignore maven-archiver
+target/maven-archiver/
+#ignore jar archives
+*.jar
+#ignor log files
+*.log
+/manager/target/
+/TSD-Request/target/
+/TCP/target/
+/viewer-wicket/target/
+/dom/target/
+/fixture/target/
+/objstore-jdo/target/
+/viewer-restfulobjects/target/
+/objstore-jdo/target-ide/
+/fixture/target-ide/
+/viewer-wicket/target-ide/
