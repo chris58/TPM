@@ -51,7 +51,7 @@ public class ShortestPathService extends AbstractService {
     }
 
     protected List<TransportPath> getShortestPaths(Destination pickup, Destination delivery) {
-        List<Route> lr = getContainer().allInstances(Route.class);
+        List<Route> lr = allInstances(Route.class);
         HashMap<String, BaseVertex> cityVertexHash = new HashMap<String, BaseVertex>();
         HashMap<BaseVertex, String> vertexCityHash = new HashMap<BaseVertex, String>();
         Graph g = new Graph();
@@ -66,7 +66,7 @@ public class ShortestPathService extends AbstractService {
                 cityVertexHash.put(r.getToCity(), v);
             }
         }
-        List<ServedRoute> lsr = getContainer().allInstances(ServedRoute.class);
+        List<ServedRoute> lsr = allInstances(ServedRoute.class);
         for (ServedRoute sr : lsr) {
             BaseVertex startCity = cityVertexHash.get(sr.getFromcity());
             BaseVertex start = g.addVertex();
@@ -93,7 +93,7 @@ public class ShortestPathService extends AbstractService {
             System.out.println("Path " + i++ + " : " + p);
 
             BaseVertex lastVertex = null;
-            TransportPath tp = getContainer().newTransientInstance(TransportPath.class);
+            TransportPath tp = newTransientInstance(TransportPath.class);
 //            TransportPath tp = new TransportPath();
             for (BaseVertex v : p.get_vertices()) {
                 if (vertexCityHash.get(v) != null) {
@@ -102,16 +102,16 @@ public class ShortestPathService extends AbstractService {
                         continue;
                     }
 //                    ShortLeg leg = new ShortLeg();
-                    ShortLeg leg = getContainer().newTransientInstance(ShortLeg.class);
+                    ShortLeg leg = newTransientInstance(ShortLeg.class);
                     leg.setFrom(vertexCityHash.get(lastVertex));
                     leg.setTo(vertexCityHash.get(v));
-//                    getContainer().persist(leg);
+//                    persist(leg);
                     tp.addLeg(leg);
                     lastVertex = v;
                     System.out.print(vertexCityHash.get(v) + "-");
                 }
             }
-//            getContainer().persist(tp);
+//            persist(tp);
             paths.add(tp);
             System.out.println();
         }
