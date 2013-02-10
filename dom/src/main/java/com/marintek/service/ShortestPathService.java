@@ -29,7 +29,25 @@ public class ShortestPathService extends AbstractService {
 
     @Hidden
     public List<TransportPath> getShortestPaths(TransportDemand td) {
-        return getShortestPaths(td.getPickup(), td.getDelivery());
+        List<TransportPath> l = new ArrayList<TransportPath>();
+
+	// if j == 1, i.e. only one element in l, then it works
+	// otherwise crash in shown table
+        for (int j = 0; j < 2; j++) {
+            TransportPath tp = newTransientInstance(TransportPath.class);
+            for (int i = 0; i < 2; i++) {
+                ShortLeg sl = newTransientInstance(ShortLeg.class);
+                sl.setFrom("from " + i + j);
+                sl.setTo("to " + i + j);
+                persist(sl);
+                tp.addLeg(sl);
+            }
+            persist(tp);
+            l.add(tp);
+        }
+	return l;
+
+        //return getShortestPaths(td.getPickup(), td.getDelivery());
     }
 
     protected List<TransportPath> getShortestPaths(Destination pickup, Destination delivery) {
